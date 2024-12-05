@@ -1,6 +1,6 @@
 [package]
 name = "rustpotion"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 authors = ["Greg Taylor gregory.taylor.au@gmail.com"]
 description = "Blazingly fast word embeddings with Tokenlearn"
