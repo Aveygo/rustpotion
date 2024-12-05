@@ -23,7 +23,7 @@ struct ModelVocab {
 /*
     Converts a word into corresponding token(s) using the vocab. Matches largest from the right.
     Not performant for long words (!!!)
-    Might be optimised with a cache for popular words
+    Might be optimized with a cache for popular words
 */ 
 fn word2tok(mut word: String, vocab: &HashMap<String, i32>) -> Result<Vec<i32>, ()> {
  
@@ -36,7 +36,7 @@ fn word2tok(mut word: String, vocab: &HashMap<String, i32>) -> Result<Vec<i32>, 
             Some tokens are reserved if they appear within a word
             Eg, the "able" token in "unable" vs "able" is different.
 
-            These unqiue tokens are "continuing-subwords", and are differentiated by starting with a ##.
+            These unique tokens are "continuing-subwords", and are differentiated by starting with a ##.
             In our case we can work backwards and just query our original target but with a ## when we 
             are already working within a word.
         */
@@ -76,23 +76,24 @@ fn word2tok(mut word: String, vocab: &HashMap<String, i32>) -> Result<Vec<i32>, 
 }
 
 /*
-    Split the sentence before attempting to find tokens, specifically to deal with puncuation & spaces.
+    Split the sentence before attempting to find tokens, specifically to deal with punctuation & spaces.
 */
 fn setencen2tok(sentence:&str, vocab:&HashMap<String, i32>) -> Result<Vec<i32>, ()> {
 
     /*
-        Spliting the sentence into words & punctuation
+        Splitting the sentence into words & punctuation
         Regex is quite performant for this
      */
 
     let re = Regex::new(r"[\w'-]+|[.,!?;]").unwrap();
-    let mut all_tokens = vec![];
     let lower = sentence.to_lowercase();
+    let lower:String = lower.chars().filter(|&c| c.is_ascii()).collect();
     let words:Vec<&str> = re.find_iter(&lower).map(|mat| mat.as_str()).collect();
     
     /*
         Accumulate found token ids
      */
+    let mut all_tokens = vec![];
     for word in words {
         all_tokens.extend(word2tok(word.to_string(), vocab)?)
     }
@@ -198,7 +199,7 @@ impl RustPotion {
             PotionModel::BASE2M => ("https://huggingface.co/minishlab/potion-base-2M/resolve/main/model.safetensors".to_string(), "https://huggingface.co/minishlab/potion-base-2M/raw/main/tokenizer.json".to_string()),
         };
 
-        /* Create the model destination directory if it doesnt exist */        
+        /* Create the model destination directory if it doesn't exist */        
         let working_directory = working_directory.join(model_kind.to_string());
         if !working_directory.exists() {
             std::fs::create_dir_all(&working_directory).unwrap();

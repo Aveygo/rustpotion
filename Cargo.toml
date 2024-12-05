@@ -5,6 +5,9 @@ edition = "2021"
 authors = ["Greg Taylor gregory.taylor.au@gmail.com"]
 description = "Blazingly fast word embeddings with Tokenlearn"
 readme = "README.md"
+homepage = "https://github.com/Aveygo/rustpotion"
+repository = "https://github.com/Aveygo/rustpotion"
+license = "MIT License"
 
 [dependencies]
 memmap2 = "0.9.5"
