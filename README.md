@@ -10,8 +10,12 @@ cargo add rustpotion
 
 ```rust
 use rustpotion::{RustPotion, PotionModel};
-let model =  RustPotion::new(PotionModel::BASE2M);
-model.encode("test"); // -> [ -0.2448156, 0.061568744 ... ]
+use std::path::Path;
+
+fn main() {
+    let model = RustPotion::new(PotionModel::BASE2M, Path::new("models"));
+    model.encode("test");
+}
 ```
 
 ## Why
