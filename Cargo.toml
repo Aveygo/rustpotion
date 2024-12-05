@@ -2,6 +2,9 @@
 name = "rustpotion"
 version = "0.1.0"
 edition = "2021"
+authors = ["Greg Taylor gregory.taylor.au@gmail.com"]
+description = "Blazingly fast word embeddings with Tokenlearn"
+readme = "README.md"
 
 [dependencies]
 memmap2 = "0.9.5"
