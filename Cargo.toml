@@ -8,6 +8,7 @@ readme = "README.md"
 homepage = "https://github.com/Aveygo/rustpotion"
 repository = "https://github.com/Aveygo/rustpotion"
 license = "MIT"
+keywords = ["embeddings", "tokenizer", "rag", "model2vec", "nlp"]
 
 [dependencies]
 memmap2 = "0.9.5"
