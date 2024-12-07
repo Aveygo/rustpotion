@@ -230,6 +230,10 @@ impl RustPotion {
         let tokens = setencen2tok(sentence, &self.vocab).unwrap();
         let mut out_array = vec![0.0f32; self.dimensions];
 
+        if sentence.len() == 0 {
+            return out_array
+        }
+
         for token in tokens.iter() {
             let tmp_arr = self.embeddings[*token as usize * self.dimensions .. (*token as usize * self.dimensions) + self.dimensions].to_vec();
             for i in 0..tmp_arr.len() {
@@ -280,5 +284,11 @@ mod tests {
             -0.10943516, 0.038111348, 0.03470044, -0.14869972, -0.10061913, -0.04580568, 0.12865654, 0.040736992, 
             0.09603614, -0.030117376, 0.34759793, 0.1326759, 0.063730046, -0.09230757, 0.20546633, 0.046358567
         ]);
+    }
+
+    #[test]
+    fn zeroed() {
+        let encoder = RustPotion::new(PotionModel::BASE2M, &Path::new("models/"));
+        assert_eq!(encoder.encode(""), vec![0.0; 64]);
     }
 }

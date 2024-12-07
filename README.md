@@ -31,11 +31,13 @@ fn main() {
 
 Because tokenlearn is so blazingly fast (mainly cause it's only just an average of some word vectors), the limiting factor is actually the tokenizer implementation.
 
-That's why it's good news that we get ~27MB/s of input sentences for potion-base-2M, which on par (if not marginally better) with most other [high performing tokenizers](https://github.com/huggingface/tokenizers).
+That's why it's good news that we get ~27MB/s of input sentences for potion-base-2M, which on par, if not marginally better, with most other [high performing tokenizers](https://github.com/huggingface/tokenizers).
 
-## Performance
+I will note that I used a custom tokenization function so it might not produce the same results for hyper-specific edge cases (eg: weird unicode characters), but otherwise should be good enough for 99.99% of inputs.
 
-This project is just a rustified version of Tokenlearn so all the results (should be) the same.
+## Accuracy
+
+Here is the expected performance of tokenlearn.
 
 | Name | MTEB Score |
 | --- | --- |
@@ -50,6 +52,12 @@ This project is just a rustified version of Tokenlearn so all the results (shoul
 3. **RustPotion::encode_many** is multithreaded and will use all available resources
 4. No limit on sentence length, but performance starts to dip after 500 tokens (~100 words) so be careful.
 
+## Warning
+If you feed in a an empty string:
+```
+model.encode("");
+```
+The resulting embedding will be a vector of length zero. May or may not be intended behavior, especially if you try to apply normalization.
 
 ## Final thoughts
-Don't use in production unless you like living on the edge
+Please don't use in production unless you like living on the edge. I hope it's clear that this is more of a hobby project rather than something professionally made.
