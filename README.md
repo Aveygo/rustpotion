@@ -58,6 +58,3 @@ If you feed in a an empty string:
 model.encode("");
 ```
 The resulting embedding will be a vector of length zero. May or may not be intended behavior, especially if you try to apply normalization.
-
-## Final thoughts
-Please don't use in production unless you like living on the edge. I hope it's clear that this is more of a hobby project rather than something professionally made.
